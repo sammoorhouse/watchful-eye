@@ -12,6 +12,8 @@ RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/latest -s 
 # Upgrade pip
 RUN pip install --upgrade pip
 
-COPY scripts/start.sh .
+RUN pip install graphyte
 
-CMD ["bash", "start.sh"]
+COPY . ./
+
+CMD ["bash", "scripts/start.sh"]
