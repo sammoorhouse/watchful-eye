@@ -20,7 +20,7 @@ def main():
         pass
 
     try:
-        os.system('echo "bingo.bongo 4 `date +%s`" | nc bollocks.io 2003')
+        os.system('ping google.com')
         print('sent successfully from commandline')
     except:
         print('failed to send from commandline')
