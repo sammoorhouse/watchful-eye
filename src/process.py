@@ -6,8 +6,8 @@ import os
 
 def main():
     telemetry_target_host = os.getenv('TELEMETRY_TARGET_HOST')
-    telemetry_target_port = os.getenv('TELEMETRY_TARGET_PORT', '2003')
-    telemetry_prefix = os.getenv('TELEMETRY_PREFIX', "io.turntabl")
+    telemetry_target_port = int(os.getenv('TELEMETRY_TARGET_PORT', '2003'))
+    telemetry_prefix = os.getenv('TELEMETRY_PREFIX', 'io.turntabl')
 
     print('prefix: ' + telemetry_prefix)
 
@@ -34,7 +34,7 @@ def main():
         signal_strength = msg.split('Link Quality=')[1].split('Signal level')[0].strip()
         
 
-    graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix='turntabl.io')
+    graphyte.init(host=telemetry_target_host, prefix='turntabl.io')
     graphyte.send('wifi.signal_quality', quality)
     graphyte.send('wifi.signal_strength', signal_strength)
     #graphyte.send('foo.blam', 43, tags={'SSID': SSID})
