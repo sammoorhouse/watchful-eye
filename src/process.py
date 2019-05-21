@@ -20,7 +20,13 @@ def main():
         pass
 
     graphyte.init(telemetry_target_host, telemetry_target_port, prefix='io.turntabl')
-    graphyte.send('foo.bar', 42, tags={'SSID': SSID})
+    message = 42
+    print('sending message ' + str(message))
+    try:
+        graphyte.send('foo.bar', message, tags={'SSID': SSID})
+    except:
+        print('send failed')
+        pass
 
 if __name__ == "__main__":
     main()
