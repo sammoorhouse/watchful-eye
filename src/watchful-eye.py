@@ -12,9 +12,6 @@ telemetry_prefix = os.getenv('TELEMETRY_PREFIX', 'io.turntabl')
 
 graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
 
-SSID = get_ssid()
-
-
 def publish_speeds():
     s = speedtest.Speedtest()
     upload = s.upload()
@@ -40,7 +37,7 @@ def publish_wifi_signal_quality():
         graphyte.send('wifi.signal_quality', quality)
 
     except CalledProcessError:
-        print("couldn't get SSID")
+        print("couldn't get signal quality")
         pass
 
 def publish_ping():
@@ -59,6 +56,9 @@ def main():
 
     #graphyte.send('4g.tagged.upload', upload / 1024 / 1024, tags={'SSID': SSID})
     #graphyte.send('4g.tagged.download', download / 1024 / 1024, tags={'SSID': SSID})
+     
+    SSID = get_ssid()
+
 
     sched = BlockingScheduler()
     sched.add_job(publish_speeds, 'interval', minutes=5)
