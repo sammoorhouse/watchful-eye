@@ -61,7 +61,7 @@ def main():
 
     print('prefix: ' + telemetry_prefix)
 
-    SSID get_ssid()
+    SSID = get_ssid()
     wifi_signal_quality = get_wifi_signal_quality()
     fourg_strength = get_4G_strength()
 
