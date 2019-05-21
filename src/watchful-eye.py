@@ -7,12 +7,10 @@ import process
 
 def main():
 
+    telemetry_wait_seconds = int(os.getenv('telemetry_wait_seconds', '60'))
     while True:
-        # Run one process loop
         process.main()
-
-        # Sleep to avoid 100% CPU usage
-        time.sleep(5)
+        time.sleep(telemetry_wait_seconds)
 
 # handle reset somewhere
 #    subprocess.call(["resin-wifi-connect", "--clear=true"])
