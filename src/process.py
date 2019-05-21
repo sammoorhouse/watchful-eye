@@ -13,7 +13,7 @@ def main():
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
 
-    print("SSID: " + SSID)
+    print("SSID: " + str(SSID, "utf-8"))
 
 if __name__ == "__main__":
     main()
