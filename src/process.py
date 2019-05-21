@@ -3,28 +3,13 @@
 from subprocess import check_output, Popen, PIPE, CalledProcessError
 import graphyte
 import os
+import speedtest
 
-def get_4G_strength():
-    #get router IP
-    router_IP = None
-    try:
-        shell_cmd = 'ip route | grep default'.format('wlan0')
-
-        proc = Popen(shell_cmd, shell=True, stdout=PIPE, stderr=PIPE)
-        output, err = proc.communicate()
-        msg = output.decode('utf-8').strip()
-
-        # like:
-        # default via 192.168.8.1 dev wlan0  metric 600 
-
-        router_IP = msg.split('via ')[1].split(' ')[0].strip();
-        
-        return 3
-        
-    except CalledProcessError:
-        print("couldn't get SSID")
-        pass
-    
+def get_speeds():
+    s = speedtest.Speedtest()
+    upload = s.upload()
+    download = s.download()
+    return upload, download
 
 def get_wifi_signal_quality():
     try:
@@ -63,11 +48,13 @@ def main():
 
     SSID = get_ssid()
     wifi_signal_quality = get_wifi_signal_quality()
-    fourg_strength = get_4G_strength()
+    upload, download = get_speeds()
 
     graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
     graphyte.send('wifi.signal_quality', wifi_signal_quality)
-    graphyte.send('4g.signal_strength', fourg_strength)
+    graphyte.send('4g.upload', upload / 1024 / 1024)
+    graphyte.send('4g.download', download / 1024 / 1024)
+
     #graphyte.send('foo.blam', 43, tags={'SSID': SSID})
 
 if __name__ == "__main__":
