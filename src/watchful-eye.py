@@ -6,12 +6,11 @@ import os
 import speedtest
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-
-graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
-
 telemetry_target_host = os.getenv('TELEMETRY_TARGET_HOST')
 telemetry_target_port = int(os.getenv('TELEMETRY_TARGET_PORT', '2003'))
 telemetry_prefix = os.getenv('TELEMETRY_PREFIX', 'io.turntabl')
+
+graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
 
 SSID = get_ssid()
 
