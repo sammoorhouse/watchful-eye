@@ -1,4 +1,4 @@
-FROM balenalib/%%RESIN_MACHINE_NAME%%-debian
+FROM balenalib/%%RESIN_MACHINE_NAME%%-python:2.7
 
 RUN install_packages dnsmasq wireless-tools
 
