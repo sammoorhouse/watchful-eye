@@ -19,6 +19,13 @@ def main():
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
 
+    try:
+        os.system('echo "bingo.bongo 4 `date +%s`" | nc bollocks.io 2003')
+        print('sent successfully from commandline')
+    except:
+        print('failed to send from commandline')
+        pass
+
     graphyte.init(telemetry_target_host, telemetry_target_port, prefix='io.turntabl')
     message = 42
     print('sending message ' + str(message))
