@@ -23,7 +23,7 @@ def main():
     try:
         shell_cmd = 'iwconfig {} | grep Link'.format('wlan0')
 
-        proc = Popen(shell_cmd, shell=True, stdout=PIPE, stderr=PIPE)
+        proc = subprocess.Popen(shell_cmd, shell=True, stdout=PIPE, stderr=PIPE)
         output, err = proc.communicate()
         msg = output.decode('utf-8').strip()
 
