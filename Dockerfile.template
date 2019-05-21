@@ -1,6 +1,6 @@
 FROM balenalib/%%RESIN_MACHINE_NAME%%-debian
 
-RUN install_packages apt_utils dnsmasq wireless-tools python-dev python-psutil wireless-tools
+RUN install_packages dnsmasq wireless-tools python-dev python-psutil
 
 WORKDIR /usr/src/app
 
