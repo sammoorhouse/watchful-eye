@@ -2,7 +2,7 @@
 
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 
-Is there an active WiFi connection?
+#Is there an active WiFi connection?
 iwgetid -r
 
 if [ $? -eq 0 ]; then
@@ -14,5 +14,4 @@ fi
 
 pwd
 ls
-
 python3 src/watchful-eye.py
