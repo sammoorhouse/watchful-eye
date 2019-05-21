@@ -55,7 +55,8 @@ def main():
     graphyte.send('4g.upload', upload / 1024 / 1024)
     graphyte.send('4g.download', download / 1024 / 1024)
 
-    #graphyte.send('foo.blam', 43, tags={'SSID': SSID})
+    graphyte.send('4g.tagged.upload', upload, tags={'SSID': SSID})
+    graphyte.send('4g.tagged.download', download, tags={'SSID': SSID})
 
 if __name__ == "__main__":
     main()
