@@ -34,7 +34,7 @@ def main():
         signal_strength = msg.split('Link Quality=')[1].split('Signal level')[0].strip()
         
 
-    graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
+    graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix='turntabl.io')
     graphyte.send('wifi.signal_quality', quality)
     graphyte.send('wifi.signal_strength', signal_strength)
     #graphyte.send('foo.blam', 43, tags={'SSID': SSID})
