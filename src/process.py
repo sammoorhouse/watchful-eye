@@ -19,6 +19,7 @@ def main():
 
     graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
     graphyte.send('foo.baz', 42)
+    graphyte.send('foo.blam', 43, tags={'SSID': SSID})
 
 if __name__ == "__main__":
     main()
