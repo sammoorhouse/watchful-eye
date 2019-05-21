@@ -12,4 +12,6 @@ else
     ./wifi-connect
 fi
 
+pwd
+ls
 python src/watchful-eye.py
