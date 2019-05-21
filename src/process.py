@@ -7,7 +7,7 @@ import os
 def main():
     telemetry_target_host = os.getenv('TELEMETRY_TARGET_HOST')
     telemetry_target_port = os.getenv('TELEMETRY_TARGET_PORT', '2003')
-    telemetry_prefix = os.getenv('TELEMETRY_PREFIX')
+    telemetry_prefix = os.getenv('TELEMETRY_PREFIX', "io.turntabl")
 
     print('prefix: ' + telemetry_prefix)
 
