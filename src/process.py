@@ -7,8 +7,7 @@ import os
 def main():
     telemetry_target_host = os.getenv('TELEMETRY_TARGET_HOST')
     telemetry_target_port = os.getenv('TELEMETRY_TARGET_PORT', '2003')
-
-    print(telemetry_target_host)
+    telemetry_prefix = os.getenv('TELEMETRY_PREFIX')
 
     SSID = None
     try:
@@ -18,9 +17,8 @@ def main():
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
 
-    print('sending')
-    graphyte.init('bollocks.io', prefix='io.turntabl')
-    graphyte.send('foo.bar', 42)
+    graphyte.init(host=telemetry_target_host, port=telemetry_target_port prefix=telemetry_prefix)
+    graphyte.send('foo.baz', 42)
 
 if __name__ == "__main__":
     main()
