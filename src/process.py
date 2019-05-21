@@ -19,7 +19,7 @@ def main():
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
 
-    quality = signal_strength = None
+    quality = None
     try:
         shell_cmd = 'iwconfig {} | grep Link'.format('wlan0')
 
@@ -30,8 +30,9 @@ def main():
         # like:
         # Link Quality=41/70  Signal level=-69 dBm  
 
-        quality = msg.split('Signal level=')[1].split('dBm')[0].strip() #hurl
-        signal_strength = msg.split('Link Quality=')[1].split('Signal level')[0].strip()
+        quality_str = msg.split('Link Quality=')[1].split('/70')[0].strip() #hurl
+        quality = int(quality_str)
+
     except CalledProcessError:
         print("couldn't get SSID")
         # If there is no connection subprocess throws a 'CalledProcessError'
@@ -39,7 +40,6 @@ def main():
 
     graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
     graphyte.send('wifi.signal_quality', quality)
-    graphyte.send('wifi.signal_strength', signal_strength)
     #graphyte.send('foo.blam', 43, tags={'SSID': SSID})
 
 if __name__ == "__main__":
