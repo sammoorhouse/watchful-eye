@@ -19,7 +19,7 @@ def main():
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
 
-    quality, signal_strength = None
+    quality = signal_strength = None
     try:
         shell_cmd = 'iwconfig {} | grep Link'.format('wlan0')
 
@@ -37,7 +37,7 @@ def main():
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
 
-    graphyte.init(host=telemetry_target_host, prefix='turntabl.io')
+    graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
     graphyte.send('wifi.signal_quality', quality)
     graphyte.send('wifi.signal_strength', signal_strength)
     #graphyte.send('foo.blam', 43, tags={'SSID': SSID})
