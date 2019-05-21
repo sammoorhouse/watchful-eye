@@ -8,7 +8,8 @@ def main():
     telemetry_target_host = os.getenv('TELEMETRY_TARGET_HOST')
     telemetry_target_port = os.getenv('TELEMETRY_TARGET_PORT', '2013')
 
-    print(telemetry_target)
+    print(telemetry_target_host)
+    print(telemetry_target_port)
 
     SSID = None
     try:
