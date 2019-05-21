@@ -9,7 +9,6 @@ def main():
     telemetry_target_port = os.getenv('TELEMETRY_TARGET_PORT', '2003')
 
     print(telemetry_target_host)
-    print(telemetry_target_port)
 
     SSID = None
     try:
@@ -19,14 +18,9 @@ def main():
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
 
-    graphyte.init(host=telemetry_target_host, prefix='io.turntabl')
-    message = 42
-    print('sending message ' + str(message))
-    try:
-        graphyte.send('foo.bar', message, tags={'SSID': SSID})
-    except:
-        print('send failed')
-        pass
+    print('sending')
+    graphyte.init('bollocks.io', prefix='io.turntabl')
+    graphyte.send('foo.bar', 42)
 
 if __name__ == "__main__":
     main()
