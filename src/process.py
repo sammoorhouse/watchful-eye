@@ -8,8 +8,6 @@ def main():
     telemetry_target_host = os.getenv('TELEMETRY_TARGET_HOST')
     telemetry_target_port = os.getenv('TELEMETRY_TARGET_PORT', '2013')
 
-    telemetry_target = telemetry_target_host + ':' + telemetry_target_port
-
     print(telemetry_target)
 
     SSID = None
@@ -20,7 +18,7 @@ def main():
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
 
-    graphyte.init(telemetry_target, prefix='io.turntabl')
+    graphyte.init(telemetry_target_host, telemetry_target_port, prefix='io.turntabl')
     graphyte.send('foo.bar', 42, tags={'SSID': SSID})
 
 if __name__ == "__main__":
