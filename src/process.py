@@ -32,7 +32,10 @@ def main():
 
         quality = msg.split('Signal level=')[1].split('dBm')[0].strip() #hurl
         signal_strength = msg.split('Link Quality=')[1].split('Signal level')[0].strip()
-        
+    except subprocess.CalledProcessError:
+        print("couldn't get SSID")
+        # If there is no connection subprocess throws a 'CalledProcessError'
+        pass
 
     graphyte.init(host=telemetry_target_host, prefix='turntabl.io')
     graphyte.send('wifi.signal_quality', quality)
