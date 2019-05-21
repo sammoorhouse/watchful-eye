@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import subprocess
+from subprocess import check_output, Popen, PIPE, CalledProcessError
 import graphyte
 import os
 
@@ -13,8 +13,8 @@ def main():
 
     SSID = None
     try:
-        SSID = str(subprocess.check_output(["iwgetid", "-r"]).strip(), "utf-8")
-    except subprocess.CalledProcessError:
+        SSID = str(check_output(["iwgetid", "-r"]).strip(), "utf-8")
+    except CalledProcessError:
         print("couldn't get SSID")
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
@@ -23,7 +23,7 @@ def main():
     try:
         shell_cmd = 'iwconfig {} | grep Link'.format('wlan0')
 
-        proc = subprocess.Popen(shell_cmd, shell=True, stdout=PIPE, stderr=PIPE)
+        proc = Popen(shell_cmd, shell=True, stdout=PIPE, stderr=PIPE)
         output, err = proc.communicate()
         msg = output.decode('utf-8').strip()
 
@@ -32,7 +32,7 @@ def main():
 
         quality = msg.split('Signal level=')[1].split('dBm')[0].strip() #hurl
         signal_strength = msg.split('Link Quality=')[1].split('Signal level')[0].strip()
-    except subprocess.CalledProcessError:
+    except CalledProcessError:
         print("couldn't get SSID")
         # If there is no connection subprocess throws a 'CalledProcessError'
         pass
