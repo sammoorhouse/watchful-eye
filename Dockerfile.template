@@ -10,9 +10,9 @@ RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/latest -s 
     | tar -xvz -C /usr/src/app/
 
 # Upgrade pip
-RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 
-RUN pip install graphyte
+RUN pip3 install graphyte
 
 COPY . ./
 
