@@ -14,4 +14,5 @@ fi
 
 pwd
 ls
-python src/watchful-eye.py
+
+python3 src/watchful-eye.py
