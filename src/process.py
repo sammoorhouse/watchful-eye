@@ -9,6 +9,8 @@ def main():
     telemetry_target_port = os.getenv('TELEMETRY_TARGET_PORT', '2003')
     telemetry_prefix = os.getenv('TELEMETRY_PREFIX')
 
+    print('prefix: ' + telemetry_prefix)
+
     SSID = None
     try:
         SSID = str(subprocess.check_output(["iwgetid", "-r"]).strip(), "utf-8")
@@ -24,7 +26,7 @@ def main():
         proc = Popen(shell_cmd, shell=True, stdout=PIPE, stderr=PIPE)
         output, err = proc.communicate()
         msg = output.decode('utf-8').strip()
-        
+
         # like:
         # Link Quality=41/70  Signal level=-69 dBm  
 
