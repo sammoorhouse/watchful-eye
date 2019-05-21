@@ -63,7 +63,7 @@ def main():
     sched = BlockingScheduler()
     sched.add_job(publish_speeds, 'interval', minutes=5)
     sched.add_job(publish_wifi_signal_quality, 'interval', minutes=0.5)
-    sched.add_job(publish_ping, 'interva', minutes=0.1)
+    sched.add_job(publish_ping, 'interval', minutes=0.1)
 
     try:
         sched.start()
