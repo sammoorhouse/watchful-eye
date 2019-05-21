@@ -7,7 +7,7 @@ import os
 
 def main():
 
-    telemetry_wait_seconds = int(os.getenv('telemetry_wait_seconds', '60'))
+    telemetry_wait_seconds = int(os.getenv('TELEMETRY_WAIT_SECONDS', '60'))
     while True:
         process.main()
         time.sleep(telemetry_wait_seconds)
