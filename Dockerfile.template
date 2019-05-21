@@ -14,7 +14,7 @@ RUN pip3 install --upgrade pip
 
 RUN pip3 install graphyte
 
-COPY scripts/ .
-COPY src/ .
+COPY scripts/ ./scripts/
+COPY src/ ./src/
 
 CMD ["bash", "scripts/start.sh"]
