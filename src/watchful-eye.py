@@ -11,6 +11,7 @@ from xml.etree import ElementTree
 telemetry_target_host = os.getenv('TELEMETRY_TARGET_HOST')
 telemetry_target_port = int(os.getenv('TELEMETRY_TARGET_PORT', '2003'))
 telemetry_prefix = os.getenv('TELEMETRY_PREFIX', 'io.turntabl')
+collect_huawei_router_data = os.getenv('COLLECT_HUAWEI_ROUTER_DATA') in ['true', 'TRUE', '1']
 
 graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
 
@@ -110,8 +111,10 @@ def main():
 
     sched = BlockingScheduler()
     sched.add_job(publish_wifi_signal_quality, 'interval', minutes=1)
-    sched.add_job(publish_router_statistics, 'interval', seconds=10)
     sched.add_job(publish_ping, 'interval', seconds=10)
+
+    if(collect_huawei_router_data):
+        sched.add_job(publish_router_statistics, 'interval', seconds=10)
 
     try:
         sched.start()
