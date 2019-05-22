@@ -12,7 +12,7 @@ RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/latest -s 
 # Upgrade pip
 RUN pip3 install --upgrade pip
 
-RUN pip3 install graphyte apscheduler requests
+RUN pip3 install graphyte apscheduler requests urllib2
 
 COPY scripts/ ./scripts/
 COPY src/ ./src/
