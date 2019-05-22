@@ -95,10 +95,10 @@ def publish_router_statistics():
     total_download_bytes = int(tree.find('TotalDownload').text)
 
     graphyte.send('4g.current_upload_bytes', current_upload_bytes)
-    graphyte.send('4g.current_upload_rate', current_upload_rate)
+    graphyte.send('4g.current_upload_rate', current_upload_rate_bps)
 
     graphyte.send('4g.current_download_bytes', current_download_bytes)
-    graphyte.send('4g.current_download_rate', current_download_rate)
+    graphyte.send('4g.current_download_rate', current_download_rate_bps)
 
 
 def main():
