@@ -83,16 +83,16 @@ def publish_router_statistics():
     #     <showtraffic>1</showtraffic>
     # </response>
 
-    current_connect_time_minutes = tree.find('CurrentConnectTime').text
-    total_connect_time_minutes = tree.find('TotalConnectTime').text
+    current_connect_time_minutes = int(tree.find('CurrentConnectTime').text)
+    total_connect_time_minutes = int(tree.find('TotalConnectTime').text)
 
-    current_upload_bytes = tree.find('CurrentUpload').text
-    current_upload_rate_bps = tree.find('CurrentUploadRate').text
-    total_upload_bytes = tree.find('TotalUpload').text
+    current_upload_bytes = int(tree.find('CurrentUpload').text)
+    current_upload_rate_bps = int(tree.find('CurrentUploadRate').text)
+    total_upload_bytes = int(tree.find('TotalUpload').text)
 
-    current_download_bytes = tree.find('CurrentDownload').text
-    current_download_rate_bps = tree.find('CurrentDownloadRate').text
-    total_download_bytes = tree.find('TotalDownload').text
+    current_download_bytes = int(tree.find('CurrentDownload').text)
+    current_download_rate_bps = int(tree.find('CurrentDownloadRate').text)
+    total_download_bytes = int(tree.find('TotalDownload').text)
 
     graphyte.send('4g.current_upload_bytes', current_upload_bytes)
     graphyte.send('4g.current_upload_rate', current_upload_rate)
