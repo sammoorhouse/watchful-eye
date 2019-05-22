@@ -4,6 +4,8 @@ Monitors some wifi health metrics and boshes them into graphite, ready for visua
 
 I've got it running on a handful of (balena)[https://balena.io]-bound raspberry pis.
 
+![Watchful Eye](/img/watchful-eye.png)
+
 ## Monitor setup
 
 Create a balena account, create a new application, install the OS on a raspberry pi.
