@@ -2,7 +2,6 @@
 
 import graphyte
 import os
-import urllib2
 import requests
 
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -84,11 +83,16 @@ def publish_router_statistics():
     #     <showtraffic>1</showtraffic>
     # </response>
 
+    current_connect_time_minutes = tree.find('CurrentConnectTime').text
+    total_connect_time_minutes = tree.find('TotalConnectTime').text
+
     current_upload_bytes = tree.find('CurrentUpload').text
-    current_upload_rate = tree.find('CurrentUploadRate').text
+    current_upload_rate_bps = tree.find('CurrentUploadRate').text
+    total_upload_bytes = tree.find('TotalUpload').text
 
     current_download_bytes = tree.find('CurrentDownload').text
-    current_download_rate = tree.find('CurrentDownloadRate').text
+    current_download_rate_bps = tree.find('CurrentDownloadRate').text
+    total_download_bytes = tree.find('TotalDownload').text
 
     graphyte.send('4g.current_upload_bytes', current_upload_bytes)
     graphyte.send('4g.current_upload_rate', current_upload_rate)
