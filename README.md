@@ -60,7 +60,7 @@ On your ```TELEMETRY_TARGET``` box, run something like the following docker-comp
         external: true
 ```
 
-You should then be able to log onto grafana at your-host:3000. Add the graphite data source which will be sitting on http://graphite. You should then be able to graph [TELEMETRY_PREFIX].wifi.signal_quality, .4g.upload, .4g.download
+You should then be able to log onto grafana at your-host:3000. Add the graphite data source which will be sitting on http://graphite:8080. You should then be able to graph [TELEMETRY_PREFIX].wifi.signal_quality, .4g.upload, .4g.download
 
 ## Comments
 keep 'em to yourself.
