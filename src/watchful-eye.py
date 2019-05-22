@@ -16,6 +16,7 @@ collect_huawei_router_data = os.getenv('COLLECT_HUAWEI_ROUTER_DATA') in ['true',
 graphyte.init(host=telemetry_target_host, port=telemetry_target_port, prefix=telemetry_prefix)
 
 def publish_wifi_signal_quality():
+    SSID = get_ssid()
     try:
         shell_cmd = 'iwconfig {} | grep Link'.format('wlan0')
 
@@ -29,14 +30,15 @@ def publish_wifi_signal_quality():
         quality_str = msg.split('Link Quality=')[1].split('/70')[0].strip() #hurl
         quality = int(quality_str)
         
-        graphyte.send('wifi.signal_quality', quality)
+        graphyte.send('wifi.signal_quality', quality, tags={'SSID': SSID})
 
     except CalledProcessError:
         print("couldn't get signal quality")
         pass
 
 def publish_ping():
-    graphyte.send('ping', 1)
+    SSID = get_ssid()
+    graphyte.send('ping', 1, tags={'SSID': SSID})
 
 def get_ssid():
     try:
@@ -66,6 +68,7 @@ def get_default_gateway():
 
 def publish_router_statistics():
     gw = get_default_gateway()
+    SSID = get_ssid()
     
     resp = requests.get('http://{}/api/monitoring/traffic-statistics'.format(gw))
     tree = ElementTree.fromstring(resp.content)
@@ -95,18 +98,13 @@ def publish_router_statistics():
     current_download_rate_bps = int(tree.find('CurrentDownloadRate').text)
     total_download_bytes = int(tree.find('TotalDownload').text)
 
-    graphyte.send('4g.current_upload_bytes', current_upload_bytes)
-    graphyte.send('4g.current_upload_rate', current_upload_rate_bps / 1024 / 1024)
+    graphyte.send('4g.current_upload_bytes', current_upload_bytes, tags={'SSID': SSID})
+    graphyte.send('4g.current_upload_rate', current_upload_rate_bps / 1024 / 1024, tags={'SSID': SSID})
 
-    graphyte.send('4g.current_download_bytes', current_download_bytes)
-    graphyte.send('4g.current_download_rate', current_download_rate_bps / 1024 / 1024)
-
+    graphyte.send('4g.current_download_bytes', current_download_bytes, tags={'SSID': SSID})
+    graphyte.send('4g.current_download_rate', current_download_rate_bps / 1024 / 1024, tags={'SSID': SSID})
 
 def main():
-
-    #graphyte.send('4g.tagged.upload', upload / 1024 / 1024, tags={'SSID': SSID})
-    #graphyte.send('4g.tagged.download', download / 1024 / 1024, tags={'SSID': SSID})
-     
     SSID = get_ssid()
 
     sched = BlockingScheduler()
