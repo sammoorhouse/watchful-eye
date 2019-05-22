@@ -66,9 +66,8 @@ def get_default_gateway():
 
 def publish_router_statistics():
     gw = get_default_gateway()
-
     
-    resp = requests.get('http://{}/api/monitoring/traffic-statistics').format(gw))
+    resp = requests.get('http://{}/api/monitoring/traffic-statistics'.format(gw))
     tree = ElementTree.fromstring(resp.content)
 
     # like
