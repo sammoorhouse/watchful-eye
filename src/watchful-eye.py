@@ -63,7 +63,7 @@ def get_default_gateway():
         return gateway
 
     except CalledProcessError:
-        print("couldn't get signal quality")
+        print("couldn't get default gateway")
         pass
 
 def publish_router_statistics():
